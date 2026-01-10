@@ -1,111 +1,171 @@
-# 🤖 Customer Support Chatbot
+# 🤖 Customer Support Chatbot  
+### Streamlit + Dialogflow + Flask (Machine Learning)
 
-A chatbot application built using **Streamlit** and **Dialogflow** that helps users resolve common customer support issues such as login problems, refunds, delivery delays, and complaints.  
-The chatbot uses **Dialogflow’s built-in Machine Learning (NLP)** to understand user queries and respond appropriately.
+An end-to-end **Customer Support Chatbot** built using **Streamlit** for the user interface, **Dialogflow** for intent routing, and a **Flask-based Machine Learning backend** for intelligent response generation.
+
+This project demonstrates how modern chatbots combine UI, NLP platforms, and custom ML models.
 
 ---
 
 ## 📌 Project Overview
 
-Customer support teams often handle repetitive queries.  
-This project demonstrates how a **chatbot interface** can automate customer support using **Natural Language Processing (NLP)**.
+Customer support teams often receive repetitive queries such as:
+- Login issues
+- Refund requests
+- Delivery delays
+- Complaints
 
-The chatbot:
-- Accepts user input in natural language
-- Identifies the intent (login issue, refund, delivery, complaint, etc.)
-- Responds with relevant support information
-- Provides a clean, chat-style UI similar to modern chat applications
+This chatbot automates these interactions by:
+- Accepting natural language input
+- Routing queries through Dialogflow
+- Using a trained ML model to classify user intent
+- Returning meaningful responses through a chat-style interface
 
 ---
 
-## 🧠 How It Works
+## 🧠 System Architecture
+
 
 User
 ->
 Streamlit Chat UI
 ->
-Dialogflow (ML-based Intent Detection)
+Dialogflow (Intent Routing)
 ->
-Bot Response
-
-
-- **Streamlit**: Frontend chat interface  
-- **Dialogflow**: NLP + Machine Learning for intent detection  
-- **Google Cloud Service Account**: Secure authentication  
+Flask Webhook (ML Model)
+->
+Response to User
 
 ---
 
 ## 🛠️ Technologies Used
 
-- Python
-- Streamlit
-- Dialogflow (Google Cloud)
-- Google Auth (Service Account)
-- REST APIs
+- **Python**
+- **Streamlit** – Chatbot user interface
+- **Dialogflow (Google Cloud)** – NLP & intent routing
+- **Flask** – Webhook server
+- **Scikit-learn** – Machine learning model
+- **Pandas** – Data processing
+- **Ngrok** – Local webhook exposure (for testing)
 
 ---
 
 ## 🎯 Features
 
-- Chat-style user interface
-- Supports multiple customer issues:
-  - Login problems
-  - Refund requests
-  - Delivery delays
+- ChatGPT-like chat interface
+- Handles multiple customer issues:
+  - Login issues
+  - Refund issues
+  - Delivery issues
   - Complaints
-  - General support queries
-- Session-based chat history
-- Easy to deploy on Streamlit Cloud
-- Beginner-friendly and internship-ready
-
+  - General queries
+- ML-based intent classification
+- Modular and scalable architecture
+- Beginner and internship friendly
 
 ---
 
 ## 📂 Project Structure
+
+
 ``` bash
-├── streamlit_app.py # Chatbot UI
+│
+├── streamlit_app.py # Streamlit chatbot UI
 ├── requirements.txt # Python dependencies
 ├── README.md # Project documentation
-└── .gitignore # Ignored files (secrets, cache)
+├── .gitignore # Ignored files
+│
+├── model/
+│ ├── train_model.py # ML training script
+│ ├── intent_model.pkl # Trained ML model
+│ └── vectorizer.pkl # TF-IDF vectorizer
+│
+└── webhook/
+└── app.py # Flask webhook (ML backend)
 ```
 
 ---
 
-## ⚠️ Important Notes
+## ⚠️ Security Notes
 
-- `service_account.json` is **NOT uploaded** to GitHub for security reasons.
-- Google credentials are managed using **Streamlit Secrets** during deployment.
-- No backend server deployment is required (Dialogflow handles ML internally).
+- `service_account.json` is **NOT uploaded to GitHub**
+- Google credentials are stored locally or via environment variables
+- Dataset files are excluded to keep the repository lightweight
 
 ---
 
 ## 🚀 How to Run Locally
 
-### 1️⃣ Install dependencies
+### 1️⃣ Install Dependencies
 ```bash
 pip install -r requirements.txt
+
 ```
 
-### 2️⃣ Add Google Service Account
+### 2️⃣ Train the Machine Learning Model
 
-- Create a service account in Google Cloud
-- Enable Dialogflow API
-- Download the JSON key
-- Place it locally (do NOT upload to GitHub)
+```bash 
+cd model
+python train_model.py
+```
 
-### 3️⃣ Run Streamlit app
+Ensure the following files are generated:
+
+```bash
+Ensure the following files are generated:
+```
+
+### 3️⃣ Run Flask Webhook
+
+```bash
+cd webhook
+python app.py
+```
+
+Expected output:
+
+```bash
+Running on http://127.0.0.1:5000
+```
+
+### 4️⃣ Expose Webhook (Local Testing)
+
+```bash
+ngrok http 5000
+```
+
+Copy the HTTPS URL and update Dialogflow → Fulfillment:
+
+```bash
+
+https://xxxx.ngrok-free.dev/webhook
+```
+
+### 5️⃣ Configure Dialogflow
+
+- Create an intent: Customer_Support
+- Add training phrases:
+
+    - i can't login
+    - i want refund
+    - delivery is late
+    - bad service
+    - help
+
+- Enable webhook fulfillment
+- Remove static text responses
+
+### 6️⃣ Run Streamlit Application
 
 ```bash
 streamlit run streamlit_app.py
 ```
 
-### 🌍 Deployment (Streamlit Cloud)
+Open in browser:
 
-1. Push project to GitHub (excluding secrets)
-2. Go to https://share.streamlit.io
-3. Select your repository and streamlit_app.py
-4. Add Google service account JSON in Streamlit Secrets
-5. Deploy 🎉
+```bash
+http://localhost:8501
+```
 
 ### 🧪 Sample Queries
 
