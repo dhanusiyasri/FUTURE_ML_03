@@ -7,10 +7,11 @@ import google.auth
 PROJECT_ID = "customersupportbot-anwb"
 SESSION_ID = "123456"
 
-credentials = service_account.Credentials.from_service_account_file(
-    "service_account.json",
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
     scopes=["https://www.googleapis.com/auth/cloud-platform"]
 )
+
 
 # ---------------- DIALOGFLOW CALL ----------------
 def detect_intent(text: str) -> str:
@@ -80,4 +81,5 @@ if user_text:
         st.markdown(bot_reply)
 
     # (Optional) Limit history length
+
     st.session_state.messages = st.session_state.messages[-30:]
