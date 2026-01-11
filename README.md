@@ -183,4 +183,10 @@ http://localhost:8501
 - Add sentiment analysis
 - Connect to real customer support systems
 
+---
+## 📬 Acknowledgment
+This project was completed as part of Future Interns – Machine Learning Task 3, focusing on practical implementation of chatbot.
+
+
+---
 ### This project is for educational and internship purposes.
